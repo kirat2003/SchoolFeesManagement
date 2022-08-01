@@ -1,7 +1,7 @@
 package org.togo.rikCorpSolution.security.utils.constants;
 
 public class JavaConstant {
-    public final static String API_BASE_URL = "/api/v1/";
+    public final static String API_BASE_URL = "/API/V1/Security/";
     public static final String TOKEN_CANNOT_BE_VERIFIED = "Token can not be verified";
     public static final String GET_ARRAYS_LLC = "Get arrays, LLC";
     public static final String GET_ARRAYS_ADMINISTRATION = "User management portal";

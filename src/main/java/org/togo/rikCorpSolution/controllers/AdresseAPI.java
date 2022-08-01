@@ -21,24 +21,24 @@ public class AdresseAPI{
         this.adresseS=adresseS;
     }
 
-    @PostMapping(path = "/create")
+    @PostMapping(path = "/create",produces = { "application/json"})
     public AdresseDTO createAddress(@RequestBody AdresseDTO adresseDTO) throws AdresseNotFoundException {
         return adresseS.ajouter(adresseDTO);
     }
-    @PutMapping(path = "/edit/{id}")
+    @PutMapping(path = "/edit/{id}",produces = { "application/json"})
     public AdresseDTO editAddress(@PathVariable("id")long id, @RequestBody AdresseDTO adresseDTO){
         adresseDTO.setId(id);
         return adresseS.mettreAJour(adresseDTO);
     }
-    @GetMapping(path = "/find/{id}")
+    @GetMapping(path = "/find/{id}",produces = { "application/json"})
     public AdresseDTO displayOneAddress(@PathVariable("id")long id){
         return adresseS.rechercher(id);
     }
-    @GetMapping(path = "/displayAll")
+    @GetMapping(path = "/displayAll",produces = { "application/json"})
     public List<AdresseDTO> displayAllAddress(){
         return adresseS.afficherTout();
     }
-    @GetMapping(path = "/displayAll/{kw}")
+    @GetMapping(path = "/displayAll/{kw}",produces = { "application/json"})
     public List<AdresseDTO> displayAllByKw(@PathVariable("kw")String keyword){
         return adresseS.afficherToutByKw(keyword);
     }

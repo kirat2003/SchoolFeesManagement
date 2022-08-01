@@ -19,12 +19,12 @@ public class TypeFraisAPI {
         this.typeFraisS=typeFraisS;
     }
 
-    @PostMapping(path = "/create")
+    @PostMapping(path = "/create",produces = { "application/json"})
     public TypeFraisDTO createTypeFrais(@RequestBody TypeFraisDTO typeFraisDTO){
         return typeFraisS.ajouter(typeFraisDTO);
     }
 
-    @PutMapping(path = "/edit/{id}")
+    @PutMapping(path = "/edit/{id}",produces = { "application/json"})
     public TypeFraisDTO editTypeFrais(@PathVariable("id")long id,@RequestBody TypeFraisDTO typeFraisDTO){
         typeFraisDTO.setId(id);
         return this.typeFraisS.mettreAJour(typeFraisDTO);
@@ -34,16 +34,16 @@ public class TypeFraisAPI {
         typeFraisS.supprimer(id);
     }
 
-    @GetMapping(path = "/find/{id}")
+    @GetMapping(path = "/find/{id}",produces = { "application/json"})
     public TypeFraisDTO findTypeFrais(@PathVariable("id")long id){
         return typeFraisS.rechercher(id);
     }
 
-    @GetMapping(path = "/displayAll")
+    @GetMapping(path = "/displayAll",produces = { "application/json"})
     public List<TypeFraisDTO> displayAll(){
         return typeFraisS.afficherTout();
     }
-    @GetMapping(path = "/displayAll/{keyword}")
+    @GetMapping(path = "/displayAll/{keyword}",produces = { "application/json"})
     public List<TypeFraisDTO> displayAll(@PathVariable("keyword")String keyword){
         return typeFraisS.afficherToutBy(keyword);
     }

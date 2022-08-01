@@ -6,6 +6,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.togo.rikCorpSolution.security.entities.Role;
+import org.togo.rikCorpSolution.security.repositories.RoleRepository;
+import org.togo.rikCorpSolution.security.requests.RegisterRequest;
+import org.togo.rikCorpSolution.security.services.UserService;
 
 import java.util.ArrayList;
 
@@ -38,4 +42,5 @@ public class GestionDuRecouvrementDesFraisScolairesApplication {
 			accountService.addRoleToUser("Admin_Tarik","ADMIN");
 		};
 	}*/
+
 }

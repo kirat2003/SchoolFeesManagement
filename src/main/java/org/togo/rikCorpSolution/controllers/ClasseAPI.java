@@ -18,24 +18,24 @@ public class ClasseAPI {
         this.classeS=classeS;
     }
 
-    @PutMapping(path = "/edit/{id}")
+    @PutMapping(path = "/edit/{id}",produces = { "application/json"})
     public ClasseDTO editClasse(@PathVariable("id")long id,@RequestBody ClasseDTO classeDTO){
         classeDTO.setId(id);
         return classeS.mettreAJour(classeDTO);
     }
-    @PostMapping(path = "/create")
+    @PostMapping(path = "/create",produces = { "application/json"})
     public ClasseDTO createClasse(@RequestParam(name = "nbrePlaceDispo")int nbrePlaceDispo,@RequestParam(name = "designation")String designation){
         return classeS.ajouter(designation,nbrePlaceDispo);
     }
-    @GetMapping(path = "/displayAll")
+    @GetMapping(path = "/displayAll",produces = { "application/json"})
     public List<ClasseDTO> displayAll(){
         return classeS.afficherTout();
     }
-    @GetMapping(path = "/find/{id}")
+    @GetMapping(path = "/find/{id}",produces = { "application/json"})
     public ClasseDTO findAClass(@PathVariable("id")long id){
         return classeS.rechercher(id);
     }
-    @GetMapping(path="/findByKeyword")
+    @GetMapping(path="/findByKeyword",produces = { "application/json"})
     public List<ClasseDTO> findByLibelle(@RequestParam(name = "keyword")String keyword){
         return classeS.findByLibelle(keyword);
     }
