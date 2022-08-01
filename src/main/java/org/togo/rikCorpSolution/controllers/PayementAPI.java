@@ -1,0 +1,63 @@
+package org.togo.rikCorpSolution.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import org.togo.rikCorpSolution.dtos.PayementDTO;
+import org.togo.rikCorpSolution.services.PayementService;
+
+import java.util.Date;
+import java.util.List;
+
+@RestController
+@RequestMapping(path = "/API/V1/Payement")
+@CrossOrigin("*")
+public class PayementAPI {
+
+    private final PayementService payementS;
+
+    @Autowired
+    public PayementAPI(PayementService payementS){
+        this.payementS = payementS;
+    }
+
+    @PostMapping(path = "/create")
+    public PayementDTO createPayement(@RequestParam(name = "montantVerse") double montantVerse,@RequestParam(name = "nomPayeur") String nomPayeur,@RequestParam(name = "idInscription") long idInscription,@RequestParam(name = "idFrais") long idFrais){
+        return payementS.ajouter(montantVerse, new Date(), nomPayeur, idInscription,idFrais);
+    }
+
+    @PutMapping(path = "/edit/{id}")
+    public PayementDTO editPayement(@PathVariable("id")long id,@RequestParam(name = "montantVerse") double montantVerse,@RequestParam(name = "nomPayeur") String nomPayeur,@RequestParam(name = "idInscription") long idInscription,@RequestParam(name = "idFrais") long idFrais){
+        return payementS.mettreAJour(new PayementDTO(id,montantVerse,new Date(),nomPayeur),idInscription,idFrais);
+    }
+    /*
+    @PutMapping(path = "/edit/Eleve/Payement/{id}")
+    public PayementDTO editPayementAndEleve(@PathVariable("id")long id,@RequestParam(name = "montantVerse") double montantVerse,@RequestParam(name = "dateDuPayement") Date dateDuPayement,@RequestParam(name = "nomPayeur") String nomPayeur,@RequestParam(name = "idInscription") long idInscription,){
+        return payementS.mettreAJour(new PayementDTO(id,montantVerse,dateDuPayement,nomPayeur),idInscription);
+    }*/
+
+    @DeleteMapping(path = "/delete/{id}")
+    public void deletePayement(@PathVariable("id")long id){
+        payementS.supprimer(id);
+    }
+
+    @GetMapping(path = "/find/{id}")
+    public PayementDTO findPayement(@PathVariable("id")long id){
+        return payementS.rechercher(id);
+    }
+    @GetMapping(path = "/displayAll")
+    public List<PayementDTO> displayAll(){
+        return payementS.afficherTout();
+    }
+    @GetMapping(path = "/searchByKwNom")
+    public List<PayementDTO> searchByKwNom(@RequestParam(name = "nom",defaultValue = "")String nom){
+        return payementS.searchByKwNom(nom);
+    }
+    @GetMapping(path = "/searchByKwPrenom")
+    public List<PayementDTO> searchByKwPrenom(@RequestParam(name = "prenom",defaultValue = "")String prenom){
+        return payementS.searchByKwPrenom(prenom);
+    }
+    @GetMapping(path = "/Inscription/{id}/payements")
+    public List<PayementDTO> getAllByIdInscription(@PathVariable("id")long idInscription){
+        return payementS.getAllByIdInscription(idInscription);
+    }
+}
