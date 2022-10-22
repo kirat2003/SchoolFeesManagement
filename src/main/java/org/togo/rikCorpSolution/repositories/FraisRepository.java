@@ -4,6 +4,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.togo.rikCorpSolution.entities.Frais;
+import org.togo.rikCorpSolution.entities.TypeFrais;
 
 import java.util.List;
 
@@ -19,5 +20,7 @@ public interface FraisRepository extends JpaRepository<Frais,Long> {
     public List<Frais> searchByDesignClass(@Param("x") String designationClasse);
     @Query("SELECT f FROM Frais f WHERE f.typeFrais.libelle LIKE %:x%")
     public List<Frais> searchBylibTypeFrais(@Param("x") String libelleTypeFrais);
+    @Query("SELECT f.typeFrais FROM Frais f WHERE f.classe.id=:idClasse")
+    public List<TypeFrais> selectTypeFraisFromFraisWhereIdClasseEqual(@Param("idClasse") long idClasse);
 
 }

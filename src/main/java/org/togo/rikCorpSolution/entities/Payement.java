@@ -15,6 +15,7 @@ public class Payement implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private double montantVerse;
+    private double resteApayer;
     private Date dateDuPayement;
     private String nomPayeur;
 
@@ -73,5 +74,13 @@ public class Payement implements Serializable {
 
     public void setInscription(Inscription inscription) {
         this.inscription = inscription;
+    }
+
+    public double getResteApayer() {
+        return resteApayer;
+    }
+
+    public void setResteApayer(double resteApayer) {
+        this.resteApayer = resteApayer;
     }
 }

@@ -3,6 +3,7 @@ package org.togo.rikCorpSolution.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.togo.rikCorpSolution.dtos.FraisDTO;
+import org.togo.rikCorpSolution.dtos.TypeFraisDTO;
 import org.togo.rikCorpSolution.services.FraisService;
 
 import java.util.List;
@@ -59,5 +60,9 @@ public class FraisAPI {
     @GetMapping(path = "/displayAllByLibType",produces = { "application/json"})
     public List<FraisDTO> displayAllByLibType(@RequestParam(name = "libTypeFrais")String kw){
         return fraisS.searchBylibTypeFrais(kw);
+    }
+    @GetMapping(path = "/selectTypeFraisFromFraisWhereIdClasseEqual/{id}",produces = { "application/json"})
+    public List<TypeFraisDTO> selectTypeFraisFromFraisWhereIdClasseEqual(@PathVariable("id")long id){
+        return fraisS.selectTypeFraisFromFraisWhereIdClasseEqual(id);
     }
 }

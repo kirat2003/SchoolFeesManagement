@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import static org.togo.rikCorpSolution.security.utils.constants.JwtConstant.EXPIRATION_TIME;
 import static org.togo.rikCorpSolution.security.utils.constants.JwtConstant.TOKEN_PREFIX;

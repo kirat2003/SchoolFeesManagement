@@ -29,6 +29,10 @@ public class Eleve implements Serializable {
     private String fonctionParentTuteur;
     @Enumerated(EnumType.STRING)
     private Genre genre;
+    @Transient
+    private String concat;
+    @Transient
+    private String adresseTotal;
 
     @JsonIgnore
     @ManyToOne
@@ -39,7 +43,6 @@ public class Eleve implements Serializable {
     private List<Inscription> inscriptions;
 
     public Eleve(){
-
     }
 
     public long getId() {
@@ -136,5 +139,21 @@ public class Eleve implements Serializable {
 
     public void setFonctionParentTuteur(String fonctionParentTuteur) {
         this.fonctionParentTuteur = fonctionParentTuteur;
+    }
+
+    public String getConcat() {
+        return concat;
+    }
+
+    public void setConcat(String concat) {
+        this.concat = concat;
+    }
+
+    public String getAdresseTotal() {
+        return adresseTotal;
+    }
+
+    public void setAdresseTotal(String adresseTotal) {
+        this.adresseTotal = adresseTotal;
     }
 }

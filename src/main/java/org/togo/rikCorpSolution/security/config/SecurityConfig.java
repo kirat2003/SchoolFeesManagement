@@ -1,5 +1,6 @@
 package org.togo.rikCorpSolution.security.config;
 
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.togo.rikCorpSolution.security.filters.JwtAuthenticationEntryPoint;
 import org.togo.rikCorpSolution.security.filters.JwtAuthorizationToken;
@@ -15,6 +16,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import static org.springframework.http.HttpMethod.GET;
 import static org.togo.rikCorpSolution.security.utils.constants.JavaConstant.PUBLIC_URLS;
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
@@ -46,13 +48,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable().cors()
                 .and()
                 .sessionManagement().sessionCreationPolicy(STATELESS)
+//                .and()
+//                .authorizeRequests().antMatchers(GET, "/API/V1/Inscription/**").hasAnyAuthority("SECRETAIRE","ROLE_ADMIN")
                 .and()
-                .authorizeRequests().antMatchers(PUBLIC_URLS).permitAll().anyRequest().authenticated()
+                .authorizeRequests().antMatchers(PUBLIC_URLS).permitAll().antMatchers(HttpMethod.OPTIONS, "/**").permitAll().anyRequest().authenticated()
                 .and()
                 .exceptionHandling().accessDeniedHandler(jwtAccessDeniedHandler).authenticationEntryPoint(jwtAuthenticationEntryPoint)
                 .and()
                 .addFilterBefore(jwtAuthorizationToken, UsernamePasswordAuthenticationFilter.class)
         ;
+//        http.csrf().disable()
+//                .authorizeRequests().antMatchers("/login")
+//                .permitAll().antMatchers(HttpMethod.OPTIONS,"/**")
+//                .permitAll().anyRequest().authenticated().and();
+//        http.authorizeRequests().antMatchers("/").permitAll()
+//                .and()
+//                .exceptionHandling().accessDeniedHandler(jwtAccessDeniedHandler).authenticationEntryPoint(jwtAuthenticationEntryPoint)
+//                .and()
+//                .addFilterBefore(jwtAuthorizationToken, UsernamePasswordAuthenticationFilter.class);
     }
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {

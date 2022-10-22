@@ -1,10 +1,12 @@
 package org.togo.rikCorpSolution.controllers;
 
+import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.togo.rikCorpSolution.dtos.PayementDTO;
 import org.togo.rikCorpSolution.services.PayementService;
 
+import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
 
@@ -59,5 +61,17 @@ public class PayementAPI {
     @GetMapping(path = "/Inscription/{id}/payements",produces = { "application/json"})
     public List<PayementDTO> getAllByIdInscription(@PathVariable("id")long idInscription){
         return payementS.getAllByIdInscription(idInscription);
+    }
+    @GetMapping(path = "/sommeVerse")
+    public Double getTotalVerse(@RequestParam(name = "idInscription")long idInscription,@RequestParam(name = "idFrais")long idFrais){
+        return payementS.sommeVerse(idInscription,idFrais);
+    }
+    @GetMapping(path = "/{id}/report")
+    public String reportPayementWhichIdIs(@PathVariable("id")long idPayement) throws JRException, FileNotFoundException {
+        return payementS.exportReport(idPayement);
+    }
+    @GetMapping(path = "/montantTotalAuj")
+    public double montantTotalAuj(){
+        return payementS.selectAmoutAllFromPayementToday(new Date());
     }
 }

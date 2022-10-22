@@ -22,6 +22,13 @@ public class InscriptionDTO {
 
     public InscriptionDTO(long id) {
     }
+    public boolean getIsInscrit() {
+        return isInscrit;
+    }
+
+    public void setIsInscrit(boolean inscrit) {
+        isInscrit = inscrit;
+    }
 
     public long getId() {
         return id;
@@ -29,14 +36,6 @@ public class InscriptionDTO {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public boolean isInscrit() {
-        return isInscrit;
-    }
-
-    public void setIsInscrit(boolean inscrit) {
-        isInscrit = inscrit;
     }
 
     public Date getDateInscription() {
@@ -70,12 +69,4 @@ public class InscriptionDTO {
     public void setClasseDTO(ClasseDTO classeDTO) {
         this.classeDTO = classeDTO;
     }
-
-    /*public EleveSpecialDTO getEleveSpecialDTO() {
-        return eleveSpecialDTO;
-    }
-
-    public void setEleveSpecialDTO(EleveSpecialDTO eleveSpecialDTO) {
-        this.eleveSpecialDTO = eleveSpecialDTO;
-    }*/
 }

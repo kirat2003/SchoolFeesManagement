@@ -20,6 +20,8 @@ import org.togo.rikCorpSolution.security.utils.JavaConverter;
 import org.togo.rikCorpSolution.security.utils.JwtUtils;
 import org.togo.rikCorpSolution.security.utils.UserPrincipal;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.http.HttpStatus.CREATED;
@@ -47,7 +49,7 @@ public class UserServiceImplementation implements UserService {
     public HttpSuccessResponse storeUser(RegisterRequest request) throws RoleNotFoundException {
         request.setPassword(bCryptPasswordEncoder.encode(request.getPassword()));
         User user = userRepository.save(javaConverter.registerToUser(request));
-        addRoleToUser("ROLE_USER", user.getUsername());
+        addRoleToUser2("Utilisateur", user.getUsername());
         return successResponse(CREATED, "Votre compte a bien été créer.", javaConverter.userToUserResponse(user));
     }
 
@@ -59,6 +61,12 @@ public class UserServiceImplementation implements UserService {
         return successResponse(OK, "Détails du compte de l'utilisateur", user.map(javaConverter::userToUserResponse));
     }
 
+    @Override
+    public Role addRole(String role) {
+        return roleRepository.save(new Role(null,role));
+    }
+
+
     private void addRoleToUser(String roleName, String username) throws RoleNotFoundException {
         Optional<Role> role = roleRepository.findByName(roleName);
         role.orElseThrow(() -> new RoleNotFoundException("Role n'existe pas"));
@@ -67,6 +75,53 @@ public class UserServiceImplementation implements UserService {
                 .orElseThrow(() -> new UsernameNotFoundException("Utilisateur n'existe pas"))
                 .getRoles()
                 .add(role.get());
+    }
+    @Override
+    public void addRoleToUser2(String role, String username) throws RoleNotFoundException {
+        Role role1 = roleRepository.findByName(role).orElseThrow(()->new RoleNotFoundException("Role n'existe pas"));
+        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("Utilisateur n'existe pas"));
+        List<Role> roleList = new ArrayList<>(user.getRoles());
+        if(!roleList.contains(role1)){
+            roleList.add(role1);
+        }
+        user.setRoles(roleList);
+        userRepository.save(user);
+    }
+
+    @Override
+    public List<User> getAllUserWithoutAdmin(String username) {
+        List<User> users= userRepository.findAll();
+        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("Utilisateur n'existe pas"));
+        if(users.contains(user)){
+            users.remove(user);
+        }
+        return users;
+    }
+    @Override
+    public List<Role> getRoles() {
+        return roleRepository.findAll();
+    }
+
+    @Override
+    public void deleteUser(String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("Utilisateur n'existe pas"));
+        user.setRoles(new ArrayList<>());
+        userRepository.save(user);
+        userRepository.deleteByUsername(username);
+    }
+    @Override
+    public void UpdateUser(String username, String password){
+        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("Utilisateur n'existe pas"));
+        user.setUsername(username);
+        user.setPassword(bCryptPasswordEncoder.encode(password));
+        userRepository.save(user);
+    }
+    @Override
+    public void deleteRoleToUser(String username, String role) throws RoleNotFoundException {
+        User user = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("Utilisateur n'existe pas"));
+        user.getRoles().remove(roleRepository.findByName(role).orElseThrow(()->new RoleNotFoundException("Role n'existe pas")));
+        userRepository.save(user);
+        userRepository.deleteById(user.getId());
     }
 
     @Override

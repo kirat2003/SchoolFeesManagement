@@ -22,6 +22,7 @@ public class InscriptionMapperImpl {
         inscription.setAnnee(AnneeMapperImpl.fromAnneeDTO(inscriptionDTO.getAnneeDTO()));
         inscription.setClasse(ClasseMapperImpl.fromClasseDTO(inscriptionDTO.getClasseDTO()));
         inscription.setEleve(EleveMapperImpl.fromEleveDTO(inscriptionDTO.getEleveDTO()));
+        inscription.setIsInscrit(inscriptionDTO.getIsInscrit());
         return inscription;
     }
 }

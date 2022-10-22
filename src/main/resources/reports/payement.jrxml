@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.20.0.final using JasperReports Library version 6.20.0-2bc7ab61c56f459e8176eb05c7705e145cd400ad  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="payement" pageWidth="842" pageHeight="480" orientation="Landscape" whenNoDataType="AllSectionsNoDetail" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="8a465670-cc4a-4270-965f-8efb86e33b71">
+	<style name="Table">
+		<box>
+			<pen lineWidth="1.0" lineColor="#000000"/>
+			<topPen lineWidth="1.0" lineColor="#000000"/>
+			<leftPen lineWidth="1.0" lineColor="#000000"/>
+			<bottomPen lineWidth="1.0" lineColor="#000000"/>
+			<rightPen lineWidth="1.0" lineColor="#000000"/>
+		</box>
+	</style>
+	<parameter name="datePayement" class="java.util.Date"/>
+	<parameter name="annee.libelle" class="java.lang.String"/>
+	<parameter name="id" class="java.lang.Long"/>
+	<parameter name="nom" class="java.lang.String"/>
+	<parameter name="prenom" class="java.lang.String"/>
+	<parameter name="classe" class="java.lang.String"/>
+	<parameter name="somme" class="java.lang.Double"/>
+	<parameter name="motif" class="java.lang.String"/>
+	<parameter name="reste à payer" class="java.lang.Double"/>
+	<parameter name="sommeApayer" class="java.lang.Double"/>
+	<queryString>
+		<![CDATA[]]>
+	</queryString>
+	<group name="Groupe1">
+		<groupFooter>
+			<band height="325">
+				<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				<staticText>
+					<reportElement x="10" y="10" width="280" height="30" uuid="34396185-019e-499d-b0c1-a6d6d44e5145"/>
+					<textElement>
+						<font fontName="Arial" size="26"/>
+					</textElement>
+					<text><![CDATA[Nom :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="50" width="280" height="30" uuid="17af4ded-c76c-45ba-8dd7-9dc79f5d2a3d"/>
+					<textElement>
+						<font fontName="Arial" size="26"/>
+					</textElement>
+					<text><![CDATA[Prénom(s) :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="90" width="280" height="30" uuid="2e3e213d-4729-41a1-8008-1dfe16f6b2df"/>
+					<textElement>
+						<font fontName="Arial" size="26"/>
+					</textElement>
+					<text><![CDATA[Classe :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="170" width="280" height="30" uuid="05f94439-4966-4264-884b-c67d943aeab7"/>
+					<textElement>
+						<font fontName="Arial" size="26"/>
+					</textElement>
+					<text><![CDATA[La somme de : (FCFA)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="130" width="280" height="30" uuid="ead20bfd-be00-4d1e-96e4-a438d96793ec"/>
+					<textElement>
+						<font fontName="Arial" size="26"/>
+					</textElement>
+					<text><![CDATA[Motif :]]></text>
+				</staticText>
+				<staticText>
+					<reportElement x="10" y="210" width="280" height="30" uuid="4f77288b-6b3f-4670-8021-f605710d44dd"/>
+					<textElement>
+						<font fontName="Arial" size="26"/>
+					</textElement>
+					<text><![CDATA[Reste à payer : ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="290" y="10" width="510" height="30" uuid="8790c1f9-e7bf-4988-ab87-e0bc7cc8f25d"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="20"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{nom}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="290" y="50" width="510" height="30" uuid="27db0c5d-5c3a-4226-8dfe-5a71e68db108"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="20"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{prenom}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="290" y="90" width="510" height="30" uuid="95baae3a-7732-4453-a957-85d4aaf7bf8d"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="20"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{classe}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="290" y="170" width="510" height="30" uuid="1361d746-525f-4546-82dc-6dd1b3caee75"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="20"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{somme}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="290" y="130" width="510" height="30" uuid="813db46e-d002-4363-ade7-6ae903121b41"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="20"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{motif}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="290" y="210" width="510" height="30" uuid="c44f55c8-c9bc-4a8b-9435-086dfc87fe5f"/>
+					<textElement verticalAlignment="Middle">
+						<font fontName="Arial" size="20"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{reste à payer}]]></textFieldExpression>
+				</textField>
+				<staticText>
+					<reportElement x="10" y="170" width="280" height="30" uuid="805ad406-c456-4305-8f08-0e522b35971e"/>
+					<textElement>
+						<font fontName="Arial" size="26"/>
+					</textElement>
+					<text><![CDATA[Montant à payer : ]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="290" y="170" width="510" height="30" uuid="d68233fa-6fc6-4f0e-8c43-e46a945f07bb"/>
+					<textElement>
+						<font fontName="Arial" size="20"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{sommeApayer}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<title>
+		<band height="115" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="0" width="250" height="80" uuid="244dff71-2a55-4a7c-8cb7-636d3e1fca55"/>
+				<imageExpression><![CDATA["C:/Users/Utilisateur/Desktop/argon-dashboard-angular-master/src/assets/img/brand/siteBrand.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="201" y="60" width="400" height="30" uuid="4bea6b72-4857-40ca-8b42-c534bcfa123b"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="25" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[Reçu de paiement N°]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="630" y="0" width="170" height="20" uuid="c77789b3-11e6-4f62-ab62-7d2874cbdccf"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{datePayement}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="630" y="30" width="170" height="20" uuid="1987706f-493b-4082-abcd-032f51ce247e"/>
+				<textElement textAlignment="Center">
+					<font fontName="Arial" size="15"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{annee.libelle}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="500" y="60" width="100" height="30" uuid="45c6fbf5-878b-4bca-a649-fbf1e773adde"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Arial" size="25"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{id}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

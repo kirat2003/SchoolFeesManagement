@@ -1,6 +1,7 @@
 package org.togo.rikCorpSolution.services;
 
 import org.togo.rikCorpSolution.dtos.FraisDTO;
+import org.togo.rikCorpSolution.dtos.TypeFraisDTO;
 
 import java.util.List;
 
@@ -15,4 +16,5 @@ public interface FraisService {
     public List<FraisDTO> searchBylibTypeFrais(String libelleTypeFrais);
 
     List<FraisDTO> displayFraisByClass(long id);
+    List<TypeFraisDTO> selectTypeFraisFromFraisWhereIdClasseEqual(long idClasse);
 }

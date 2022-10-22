@@ -1,7 +1,9 @@
 package org.togo.rikCorpSolution.services;
 
+import net.sf.jasperreports.engine.JRException;
 import org.togo.rikCorpSolution.dtos.PayementDTO;
 
+import java.io.FileNotFoundException;
 import java.util.Date;
 import java.util.List;
 
@@ -15,4 +17,9 @@ public interface PayementService {
     public List<PayementDTO> searchByKwNom(String nom);
     public List<PayementDTO> searchByKwPrenom(String prenom);
     public List<PayementDTO> getAllByIdInscription(long id);
+    public Double sommeVerse(long idPayement,long idFrais);
+
+    String exportReport(long idPayement) throws FileNotFoundException, JRException;
+
+    double selectAmoutAllFromPayementToday(Date date);
 }

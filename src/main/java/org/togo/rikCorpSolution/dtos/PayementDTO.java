@@ -6,6 +6,7 @@ public class PayementDTO {
 
     private long id;
     private double montantVerse;
+    private double resteApayer;
     private Date dateDuPayement;
     private String nomPayeur;
     private InscriptionDTO inscriptionDTO;
@@ -68,5 +69,13 @@ public class PayementDTO {
 
     public void setFraisDTO(FraisDTO fraisDTO) {
         this.fraisDTO = fraisDTO;
+    }
+
+    public double getResteApayer() {
+        return resteApayer;
+    }
+
+    public void setResteApayer(double resteApayer) {
+        this.resteApayer = resteApayer;
     }
 }

@@ -14,6 +14,8 @@ public class Inscription implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private boolean isInscrit;
+    @Transient
+    private String statut;
     private Date dateInscription;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -22,8 +24,10 @@ public class Inscription implements Serializable {
     private Annee annee;
     @ManyToOne(fetch = FetchType.EAGER)
     private Classe classe;
-    @ManyToOne(fetch = FetchType.EAGER)
-    private EleveSpecial eleveSpecial;
+    @OneToMany(mappedBy ="inscription",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<EleveSpecial> eleveSpecials;
+    @OneToMany(mappedBy ="inscription",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    private List<Engagement> engagements;
 
     @OneToMany(mappedBy = "inscription",fetch = FetchType.LAZY,cascade = CascadeType.ALL)
     private List<Payement> payements;
@@ -79,12 +83,12 @@ public class Inscription implements Serializable {
         this.classe = classe;
     }
 
-    public EleveSpecial getEleveSpecial() {
-        return eleveSpecial;
+    public List<EleveSpecial> getEleveSpecials() {
+        return eleveSpecials;
     }
 
-    public void setEleveSpecial(EleveSpecial eleveSpecial) {
-        this.eleveSpecial = eleveSpecial;
+    public void setEleveSpecials(List<EleveSpecial> eleveSpecials) {
+        this.eleveSpecials = eleveSpecials;
     }
 
     public List<Payement> getPayements() {
@@ -93,5 +97,13 @@ public class Inscription implements Serializable {
 
     public void setPayements(List<Payement> payements) {
         this.payements = payements;
+    }
+
+    public String getStatut() {
+        return statut;
+    }
+
+    public void setStatut(String statut) {
+        this.statut = statut;
     }
 }

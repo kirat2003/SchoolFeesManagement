@@ -1,32 +1,24 @@
 package org.togo.rikCorpSolution.entities;
 
-import org.togo.rikCorpSolution.enums.Genre;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import java.io.Serializable;
-import java.util.Date;
-import java.util.List;
 
 @Entity
-public class EleveSpecial implements Serializable {
-
+public class Engagement implements Serializable {
     private static final long serialVersionUID = 1L;
-
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+    private long taux;
+    private String typeEngagement;
     @ManyToOne(fetch = FetchType.EAGER)
     private Inscription inscription;
     @ManyToOne(fetch = FetchType.EAGER)
     private Frais frais;
 
-    public EleveSpecial() {
-    }
-
-    public EleveSpecial(long id, Inscription inscription, Frais frais) {
-        this.id = id;
-        this.inscription = inscription;
-        this.frais = frais;
+    public Engagement() {
     }
 
     public long getId() {

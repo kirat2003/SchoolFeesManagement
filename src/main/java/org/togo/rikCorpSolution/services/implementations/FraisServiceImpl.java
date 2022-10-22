@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.togo.rikCorpSolution.dtos.FraisDTO;
+import org.togo.rikCorpSolution.dtos.TypeFraisDTO;
 import org.togo.rikCorpSolution.entities.Frais;
 import org.togo.rikCorpSolution.mappers.ClasseMapperImpl;
 import org.togo.rikCorpSolution.mappers.FraisMapperImpl;
@@ -74,11 +75,16 @@ public class FraisServiceImpl implements FraisService {
 
     @Override
     public List<FraisDTO> searchBylibTypeFrais(String libelleTypeFrais) {
-        return fraisRep.searchBylibTypeFrais(libelleTypeFrais).stream().map(frais -> FraisMapperImpl.fromFrais(frais)).collect(Collectors.toList());
+        return fraisRep.searchBylibTypeFrais(libelleTypeFrais).stream().map(FraisMapperImpl::fromFrais).collect(Collectors.toList());
     }
 
     @Override
     public List<FraisDTO> displayFraisByClass(long id) {
-        return fraisRep.displayFraisByClass(id).stream().map(frais -> FraisMapperImpl.fromFrais(frais)).collect(Collectors.toList());
+        return fraisRep.displayFraisByClass(id).stream().map(FraisMapperImpl::fromFrais).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<TypeFraisDTO> selectTypeFraisFromFraisWhereIdClasseEqual(long idClasse) {
+        return fraisRep.selectTypeFraisFromFraisWhereIdClasseEqual(idClasse).stream().map(TypeFraisMapperImpl::fromTypeFrais).collect(Collectors.toList());
     }
 }
